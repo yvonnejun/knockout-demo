@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+<input type="text" data-bind="value:price,style:{color:price()>0?'red':'black'}"/>
+<!--<span data-bind="style:{color:price()>0?'red':'black','font-Weight':price()>0?'bold':'normal'}">测试</span>-->
+<span data-bind="style:{color:price()>0?'red':'black',fontWeight:price()>0?'bold':'normal'}">测试</span>
+</body>
+<script type="text/javascript">
+    var myViewMode = {
+        price:ko.observable(100)
+    }
+
+    ko.applyBindings(myViewMode);
+
+
+</script>
+</html>

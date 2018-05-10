@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+    <script src="Script/jquery-1.6.4.js" type="text/javascript"></script>
+
+    <script src="Script/jquery-jquery-tmpl-07d08cb/jquery.tmpl.js" type="text/javascript"></script>
+
+    <script id="studentsTemplate" type="text/x-jquery-tmpl">
+                <tr>
+                    <td style="width:20px;" >
+                        {{if Class&&Class.length>0}}  <img src="Image/folder_o.png" class="detailsImg" />  {{/if}}
+                    </td>
+                    <td>
+                     ${Name}
+                    </td>
+                    <td>
+                        ${Sex}
+                    </td>
+                    <td style="text-align:center;"><a href="javascript:AjaxDeleteInvoke(${ID})">删除</td>
+                </tr>
+
+                 {{if Class&&Class.length>0}}
+                  <tr>
+                        <td colspan="4">
+                            <table style=" margin:0px; " cellpadding="0" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr style="text-align:center; font-size:large; font-weight:bolder;">
+                                        <td>
+                                            班级名
+                                        </td>
+                                        <td>
+                                            人数
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{each Class}}
+                                        <tr {{if $value.Count>16}} style="background:red;" {{else  $value.Count>12}}style="background:yellow;"  {{/if}}><td> ${$value.ClassName} </td><td>  ${$value.Count} </td></tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </td>
+                  </tr>
+                 {{/if}}
+    </script>
+
+    <script type="text/javascript">
+        ; String.format = function() {
+            var s = arguments[0];
+            for (var i = 0; i < arguments.length - 1; i++) {
+                var reg = new RegExp("\\{" + i + "\\}", "gm");
+                s = s.replace(reg, arguments[i + 1]);
+            }
+            return s;
+        };
+        function AjaxDeleteInvoke(id) {
+            alert(String.format("AjaxDeleteInvoke:id={0}", id));
+        }
+        $(function() {
+
+            var data = new Array();
+            for (var i = 0; i < 19; i++) {
+                data.push(
+                {
+                    Name: String.format("学生{0}", i),
+                    Sex: i % 2 == 0 ? "男" : "女",
+                    ID: i,
+                    Class:
+                    [
+                        {
+                            ClassName: String.format("Class{0}", i),
+                            Count: (i + 10) / 2
+                        },
+                         {
+                             ClassName: String.format("Class2{0}", i),
+                             Count: (i + 20) / 2
+                         }
+                   ]
+                });
+            }
+            // alert($("#studentsTemplate").tmpl(data).htm());
+            $("#studentsTemplate").tmpl(data).appendTo("#test>tbody");
+            $("#test>tbody table").hide();
+            $(".detailsImg").live("click", function() {
+                var state = $(this).data("state");
+                var $tr = $(this).parent().parent();
+                if (state == "o") {
+                    $("table", $tr.next()).hide();
+                    $(this).data("state", "c");
+
+                    $(this).attr("src", "Image/folder_o.png");
+                } else {
+                    $("table", $tr.next()).show();
+                    $(this).data("state", "o");
+                    $(this).attr("src", "Image/folder_c.png");
+                }
+            });
+        });  
+    </script>
+
+</head>
+<body>
+    <form id="form1">
+    <div id="div1">
+        <table style="margin-top: 10; margin-left: 300px;" border="1" cellpadding="0" cellspacing="0"
+            id="test" width="500">
+            <thead>
+                <tr style="text-align: center; font-size: larger; font-weight: bolder;">
+                    <td>
+                        ID
+                    </td>
+                    <td>
+                        姓名
+                    </td>
+                    <td>
+                        性别
+                    </td>
+                    <td>
+                        操作
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    </form>
+</body>
+</html>

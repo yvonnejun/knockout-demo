@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <!--<script type="text/javascript" src="../js/json2.js"></script>-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+    <!--<script type="text/javascript" src="../js/knockout.mapping-2.4.1.js"></script>-->
+    <script type="text/javascript" src="../js/knockout.mapping-2.4.1.debug.js"></script>
+</head>
+<body>
+name:<span data-bind="text:name"></span><p/>
+sex:<span data-bind="text:sex"></span><p/>
+age:<span data-bind="text:age"></span><p/>
+<button onclick="done1()">Done</button>
+<script type="text/javascript">
+;
+    var viewModel={
+        name:ko.observable("tom"),
+        sex:ko.observable("男"),
+        age:ko.observable(18)
+    };
+
+    ko.applyBindings(viewModel);
+
+    function done1(){
+
+        var mapping={
+            'ignore':["age","name"],
+            'sex':{
+                update:function(options){
+                    var sex = options.data;
+                    if (sex==0)
+                        return "女";
+                    else
+                        return "男";
+                }
+            }
+
+        };
+
+        var data = {    name: 'zhang',  sex:0,age:20};
+
+        ko.mapping.fromJS(data,mapping,viewModel);
+    }
+
+function done2(){
+
+    /*var mapping={
+        'ignore':["age","name"]
+    };*/
+
+    ko.mapping.defaultOptions().ignore =["age","name"];
+
+    var data = {    name: 'zhang',  sex:"女",age:20};
+
+    ko.mapping.fromJS(data,{},viewModel);
+}
+
+</script>
+</body>
+</html>

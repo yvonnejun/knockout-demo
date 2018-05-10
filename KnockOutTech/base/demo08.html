@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+
+
+
+   请输入新的价格：<input  id="txtNumber" type="text"
+                   data-bind="hasfocus:!lastInputWasValid()"/>
+   <div data-bind="visible:!lastInputWasValid()"><font color="red">请输入数字！</font></div>
+
+
+
+
+
+</body>
+<script type="text/javascript">
+
+
+  function MyViewModel() {
+      this.acceptedNumericValue = ko.observable(123);
+      this.lastInputWasValid = ko.observable(true);
+
+      this.attemptedValue = ko.computed({
+          read: this.acceptedNumericValue,
+          write: function (value) {
+              //alert(value);
+              if (isNaN(value)){
+                  this.lastInputWasValid(false);
+
+              }
+              else {
+                  this.lastInputWasValid(true);
+                  this.acceptedNumericValue(value); // Write to underlying storage
+              }
+          },
+          owner: this
+      });
+  }
+   ko.applyBindings(new MyViewModel());
+</script>
+</html>

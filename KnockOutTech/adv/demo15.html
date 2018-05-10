@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <!--<script type="text/javascript" src="../js/json2.js"></script>-->
+
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+    <!--<script type="text/javascript" src="../js/knockout.mapping-2.4.1.js"></script>-->
+    <script type="text/javascript" src="../js/knockout.mapping-2.4.1.debug.js"></script>
+
+
+
+</head>
+<body>
+name:<span data-bind="text:name"></span><p/>
+<ul data-bind="foreach:children">
+    <li>id:<span data-bind="text:id"></span></li>
+    <li>name:<span data-bind="text:name"></span></li>
+</ul>
+<p/>
+<button onclick="done()">Done</button>
+<script type="text/javascript">
+
+    var viewModel={
+        name:ko.observable("tom"),
+        children:ko.observableArray( [{id:1,name:"zhangsan"}])
+    };
+
+    ko.applyBindings(viewModel);
+
+    function done(){
+        var data = {
+            name: 'Scot',
+            children: [{ id:2, name: 'abc' } ]
+        }
+        var mapping = {
+            'children': {
+                key: function (data) {
+                    return ko.utils.unwrapObservable(data.id);
+                    //return ko.utils.unwrapObservable(data.name);
+                }
+        }};
+       ko.mapping.fromJS(data,mapping,viewModel);
+    }
+
+</script>
+</body>
+</html>

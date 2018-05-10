@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+    <script type="text/javascript" src="js/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="js/jquery-tmpl/jquery.tmpl.js"></script>
+
+</head>
+<body>
+<div id="mydiv">
+
+</div>
+
+<script id="mytmpl" type="text/x-jquery-tmpl">
+   <div>
+      <span>${$data.ID}</span>
+      <span style="margin-left:10px">${$item.getName(" ")}</span>
+   </div>
+</script>
+
+<script  type="text/javascript">
+    var users = [
+        { ID: 'think8848', Name: ['Joseph', 'Chan'] },
+        { ID: 'aCloud', Name: ['Mary', 'Cheung']}
+    ];
+
+    $("#mytmpl").tmpl(users,{
+        getName:function(spr){
+            return this.data.Name.join(spr);
+        }
+    }).appendTo("#mydiv");
+
+</script>
+</body>
+</html>

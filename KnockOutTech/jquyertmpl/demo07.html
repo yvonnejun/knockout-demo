@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+    <script type="text/javascript" src="js/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="js/jquery-tmpl/jquery.tmpl.js"></script>
+
+</head>
+<body>
+<div id="div_wrap">
+
+</div>
+
+<script id="tmpl1" type="text/x-jquery-tmpl">
+    The following wraps and reorders some HTML content:
+    {{wrap "#tableWrapper"}}
+        <h3>One</h3>
+        <div>
+            First <b>content</b>
+        </div>
+        <h3>Two</h3>
+        <div>
+            And <em>more</em> <b>content</b>...
+        </div>
+    {{/wrap}}
+</script>
+<script id="tableWrapper" type="text/x-jquery-tmpl">
+ <table cellspacing="0" cellpadding="3" border="1"><tbody>
+        <tr>
+            {{each $item.html("h3", true)}}
+                <td>
+                    ${$value}
+                </td>
+            {{/each}}
+        </tr>
+        <tr>
+            {{each $item.html("div")}}
+                <td>
+                    {{html $value}}
+                </td>
+            {{/each}}
+        </tr>
+    </tbody></table>
+</script>
+<script  type="text/javascript">
+    $('#tmpl1').tmpl().appendTo('#div_wrap');
+</script>
+</body>
+</html>

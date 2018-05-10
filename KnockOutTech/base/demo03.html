@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+   <!--step3: 绑定ViewModel到特定的View上-->
+    My Name is  <div id="div1" data-bind="text:personName"></div>,
+   My Age is <strong data-bind="text:personAge"></strong>
+   <p/>
+
+    Name:<input type="text" data-bind="value:personName"/>
+    Age:<input type="text" data-bind="value:personAge"/>
+   <button  onclick="changeName()">ChangeName</button>
+   <button onclick="changeAge()">ChangeAge</button>
+   <button onclick="test()">Test</button>
+   <button onclick="getValue()">GetValue</button>
+</body>
+<script type="text/javascript">
+    //step2 定义ViewModel
+    //var myViewModel ={personName:"zhangsan",personAge:18};
+    var myViewModel ={
+        personName:ko.observable(""),
+        personAge:ko.observable()
+    }
+
+    //step4: 激活KO
+    ko.applyBindings(myViewModel);
+
+    function changeName(){
+        myViewModel.personName("zhangsan");
+    }
+    function changeAge(){
+        myViewModel.personAge(18);
+    }
+    function test(){
+        myViewModel.personName("lishi").personAge(20);
+    }
+    function getValue(){
+        var personName = myViewModel.personName();
+        var personAge=myViewModel.personAge();
+        alert("personName:"+personName+",personAge:"+personAge);
+    }
+</script>
+</html>

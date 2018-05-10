@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+<lable><input type="checkbox" data-bind="checked:displayMessage"/>Display Message</lable>
+<div data-bind="ifnot:!displayMessage()">Here is A Message</div>
+</body>
+<script type="text/javascript">
+    ko.applyBindings({
+        displayMessage:ko.observable(true)
+    })
+</script>
+</html>

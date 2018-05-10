@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="../js/knockout-3.1.0.debug.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="resources/knockout.simpleGrid.3.0.js"></script>
+
+
+</head>
+<body>
+<div data-bind='simpleGrid: gridViewModel'> </div>
+
+<button data-bind='click: addItem'>
+   添加一项
+</button>
+
+<button data-bind='click: sortByName'>
+    按图书名称排序
+</button>
+<button data-bind='click: sortByPrice'>
+    按图书价格排序
+</button>
+
+<button data-bind='click: jumpToFirstPage, enable: gridViewModel.currentPageIndex'>
+    跳到首页
+</button>
+<button data-bind='click: jumpToEndPage, disable: isEndPage'>
+    跳到尾页
+</button>
+
+<script type="text/javascript">
+    var initialData = [
+        { bookName: "图书A", publish:"出版社-1" , price: 75.95,publishDate:"2010-10-1" },
+        { bookName: "图书B", publish: "出版社-2", price: 50,publishDate:"2011-10-1" },
+        { bookName: "图书C", publish: "出版社-3", price: 61,publishDate:"2012-10-1" },
+        { bookName: "图书D", publish: "出版社-4", price: 76,publishDate:"2013-10-1" },
+        { bookName: "图书E", publish: "出版社-5", price: 88,publishDate:"2010-9-1" },
+        { bookName: "图书F", publish: "出版社-6", price: 99,publishDate:"2010-10-2" },
+        { bookName: "图书G", publish: "出版社-7", price: 100,publishDate:"2010-8-1" },
+    ];
+
+    var PagedGridModel = function(items) {
+        this.items = ko.observableArray(items);
+        this.isEndPage = ko.observable(false);
+
+        this.addItem = function() {
+            this.items.push({ bookName: "新图书", publish: "出版社-new", price: 0,publishDate:"2014-8-1" });
+        };
+
+        this.sortByName = function() {
+            this.items.sort(function(a, b) {
+                return a.bookName < b.bookName ? 1 : -1;
+            });
+        };
+
+        this.sortByPrice = function(){
+            this.items.sort(function(a,b){
+                return a.price< b.price?-1:1;
+            });
+        }
+
+        this.jumpToFirstPage = function() {
+            this.gridViewModel.currentPageIndex(0);
+            this.isEndPage(false);
+        };
+        this.jumpToEndPage = function() {
+
+            this.gridViewModel.currentPageIndex(this.gridViewModel.maxPageIndex());
+            this.isEndPage(true);
+        };
+
+
+        this.gridViewModel = new ko.simpleGrid.viewModel({
+            data: this.items,
+            columns: [
+                { headerText: "书名", rowText: "bookName" },
+                { headerText: "出版社", rowText: "publish" },
+                { headerText: "图书价格", rowText: function (item) { return "￥" + item.price.toFixed(2) } },
+                { headerText: "出版日期", rowText:"publishDate" }
+            ],
+            pageSize: 3
+        });
+    };
+
+    ko.applyBindings(new PagedGridModel(initialData));
+
+</script>
+
+
+</body>
+
+</html>

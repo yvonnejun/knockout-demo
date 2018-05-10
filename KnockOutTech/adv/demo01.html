@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+</head>
+<body>
+<div data-bind="slideVisible:giftWrap,slideDuration:600">这是一个用于测试动画效果的DIV元素</div>
+<label><input type="checkbox" data-bind="checked:giftWrap">隐藏/显示 </label>
+<script type="text/javascript">
+
+    ko.bindingHandlers.slideVisible={
+        update: function(element, valueAccessor, allBindingsAccessor) {
+            //第一步得到绑定元素上面的当前值
+             var value=valueAccessor();
+             var isVisible = ko.utils.unwrapObservable(value);
+            //第二步得到所有data-bind所对应的属性
+            var allBindings = allBindingsAccessor();
+            var duration = allBindings.slideDuration || 400;
+            console.log(isVisible);
+            console.log(duration);
+            //第三步根据当前绑定的值来做业务逻辑，当前值为true,就让当前的元素动画隐藏，否则的话，动画显示
+            if (isVisible){
+                $(element).slideDown(duration);
+            }else{
+                $(element).slideUp(duration);
+            }
+
+        }
+    };
+
+    var viewModel={
+        giftWrap: ko.observable(true)
+    };
+    ko.applyBindings(viewModel);
+</script>
+</body>
+</html>

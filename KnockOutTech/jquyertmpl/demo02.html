@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+    <script type="text/javascript" src="js/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="js/jquery-tmpl/jquery.tmpl.js"></script>
+
+</head>
+<body>
+<div id="div1_demo">
+
+</div>
+
+<script id="demo" type="text/x-jquery-tmpl">
+    <div style="margin-bottom:10px;">
+    　　<span>${ID}</span>
+    　　<span style="margin-left:10px;">{{= Name}}</span>
+    　　<span style="margin-left:10px;">${Number(Num)+1}</span>
+    　　<span style="margin-left:10px;">${Status}</span>
+    </div>
+</script>
+<script  type="text/javascript">
+      var users = [
+      { ID: 'think8848', Name: 'Joseph Chan', Num: '1', Status: 1 },
+      { ID: 'aCloud', Name: 'Mary Cheung', Num: '2'}
+      ];
+      $("#demo").tmpl(users).appendTo("#div1_demo");
+</script>
+</body>
+</html>

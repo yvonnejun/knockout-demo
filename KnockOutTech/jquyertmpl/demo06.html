@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+    <script type="text/javascript" src="js/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="js/jquery-tmpl/jquery.tmpl.js"></script>
+
+</head>
+<body>
+<div id="div_tmpl">
+
+</div>
+
+<script id="tmpl1" type="text/x-jquery-tmpl">
+<h2>${ID}</h2>
+<p>Name:</p>
+{{tmpl($data) '#tmpl2'}}
+</script>
+<script id="tmpl2" type="text/x-jquery-tmpl">
+<ul>
+    {{each Name}}
+        <li>
+        ${$value}
+        </li>
+    {{/each}}
+</ul>
+</script>
+<script  type="text/javascript">
+    var users = [
+        { ID: 'think8848', Name: ['Joseph', 'Chan'] },
+        { ID: 'aCloud', Name: ['Mary', 'Cheung']}
+    ];
+    $("#tmpl1").tmpl(users).appendTo("#div_tmpl");
+</script>
+</body>
+</html>

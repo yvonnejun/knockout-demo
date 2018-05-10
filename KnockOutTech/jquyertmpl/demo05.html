@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+    <script type="text/javascript" src="js/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="js/jquery-tmpl/jquery.tmpl.js"></script>
+
+</head>
+<body>
+<div id="div_html">
+
+</div>
+
+<script id="html" type="text/x-jquery-tmpl">
+<div>Id:${Id}</div>
+<div>Name:{{= Name}}</div>
+<div>Html:
+     ${html}
+     {{html html}}
+</div>
+</script>
+<script  type="text/javascript">
+    var data = {Id:1,Name:"zhang",html:"<button>Test</button>"};
+      $("#html").tmpl(data).appendTo("#div_html");
+</script>
+</body>
+</html>

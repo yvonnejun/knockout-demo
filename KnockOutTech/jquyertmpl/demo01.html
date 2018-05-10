@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+    <script type="text/javascript" src="js/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="js/jquery-tmpl/jquery.tmpl.js"></script>
+    <script type="text/javascript">
+        $(function(){
+           //第一种应用方式
+            /*var markup = "<li><b>${Name}</b>(${ReleaseYear})</li>";
+            $.template("movieTemplate",markup);
+            var movies=[
+                {Name:"A电影",ReleaseYear:"1988"},
+                {Name:"B电影",ReleaseYear:"1998"},
+                {Name:"C电影",ReleaseYear:"2008"}
+            ]
+           $.tmpl("movieTemplate",movies).appendTo("#movieList");*/
+            //第二种应用方式
+            /*var markup = "<li><b>${Name}</b>(${ReleaseYear})</li>";
+             var movies=[
+             {Name:"A电影",ReleaseYear:"1988"},
+             {Name:"B电影",ReleaseYear:"1998"},
+             {Name:"C电影",ReleaseYear:"2008"}
+             ]
+             $.tmpl(markup,movies).appendTo("#movieList");*/
+
+            //第三种应用方式（推荐）
+            var movies=[
+                {Name:"A电影",ReleaseYear:"1988"},
+                {Name:"B电影",ReleaseYear:"1998"},
+                {Name:"C电影",ReleaseYear:"2008"}
+            ];
+            $("#movieTemplate").tmpl(movies).appendTo("#movieList");
+
+        })
+
+
+    </script>
+</head>
+<body>
+<ul id="movieList"></ul>
+<script id="movieTemplate" type="text/x-jquery-tmpl">
+   <li><b>${Name}</b>(${ReleaseYear})</li>
+</script>
+</body>
+</html>

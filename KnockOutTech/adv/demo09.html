@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <script type="text/javascript" src="../js/json2.js"></script>
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+</head>
+<body>
+firstName:<input data-bind="value:firstName"></strong><br/>
+lastName:<input data-bind="value:lastName"></strong>
+
+
+
+<script type="text/javascript">
+    ko.extenders.logChange=function(target,option){
+        target.subscribe(function(newValue){
+             console.log(option+":"+newValue);
+        })
+        return target;
+    }
+
+    var viewModel = {
+        firstName:ko.observable("zhang").extend({logChange:"firstName"}),
+        lastName:ko.observable("san").extend({logChange:"lastName"}),
+    }
+
+    ko.applyBindings(viewModel);
+
+
+</script>
+</body>
+</html>

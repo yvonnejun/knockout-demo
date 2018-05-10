@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+</head>
+<body>
+firstName:<input data-bind="value:firstName"></strong><br/>
+lastName:<input data-bind="value:lastName"></strong>
+
+<button onclick="toJson()">toJson</button>
+<button onclick="submit()">submit</button>
+
+<script type="text/javascript">
+    var viewModel = {
+        firstName: ko.observable("Bert"),
+        lastName: ko.observable("Smith"),
+        pets: ko.observableArray(["Cat", "Dog", "Fish"]),
+        type: "Customer"};
+   ko.applyBindings(viewModel);
+
+    function toJson(){
+       // var jsonData =
+        //var firstName = viewModel.firstName();
+        var json = ko.toJS(viewModel);
+        //alert(json.firstName);
+        //alert(json.pets);
+        console.log(json);
+
+        //var jsonString = JSON.serialize()
+        //alert(jsonString.firstName);
+        var jsonString = ko.toJSON(viewModel);
+        //alert(jsonString);
+        console.log(jsonString);
+
+    }
+
+    function submit(){
+        var jsonString = ko.toJSON(viewModel);
+       // $.post("some/url",jsonString,function(data){})
+        alert(jsonString);
+    }
+</script>
+</body>
+</html>

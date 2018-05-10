@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+<a data-bind="text:content,attr:{href:url,title:title,target:desc}"></a>
+</body>
+<script type="text/javascript">
+    var myViewMode = {
+        url:ko.observable("http://www.baidu.com"),
+        title:ko.observable("点击打开百度"),
+        desc:"_blank",
+        content:"百度"
+    }
+
+    ko.applyBindings(myViewMode);
+
+
+</script>
+</html>

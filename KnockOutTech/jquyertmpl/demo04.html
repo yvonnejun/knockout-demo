@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+    <script type="text/javascript" src="js/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="js/jquery-tmpl/jquery.tmpl.js"></script>
+
+</head>
+<body>
+<div id="div_ifelse">
+
+</div>
+
+<script id="ifelse" type="text/x-jquery-tmpl">
+    <div style="margin-bottom:10px;">
+    　　<p>ID:${ID}</p>
+        <p>Name:{{= Name}}</p>
+        <p>Other:
+           {{if Status}}
+              <span>${Status}</span>
+           {{else App}}
+              <span>${App}</span>
+           {{else}}
+              <span>None</span>
+           {{/if}}
+        </p>
+    </div>
+</script>
+<script  type="text/javascript">
+    var users = [
+        { ID: 'think8848', Name: 'Joseph Chan', Status: 1, App: 0 },
+        { ID: 'aCloud', Name: 'Mary Cheung', App: 1 },
+        { ID: 'bMingdao', Name: 'Jerry Jin'}
+    ];
+      $("#ifelse").tmpl(users).appendTo("#div_ifelse");
+</script>
+</body>
+</html>

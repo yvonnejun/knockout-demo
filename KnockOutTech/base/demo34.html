@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+<form data-bind="submit:doSubmit">
+    <input type="text" id="txtName" />
+    <button type="submit">提交</button>
+</form>
+</body>
+<script type="text/javascript">
+   var viewModel={
+      doSubmit:function(form){
+          console.log(form);
+          var txtName = form.txtName.value;
+          console.log(txtName);
+          alert("submit Successed !");
+      }
+   };
+   ko.applyBindings(viewModel);
+</script>
+</html>

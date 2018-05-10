@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <!--<script type="text/javascript" src="../js/json2.js"></script>-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+    <!--<script type="text/javascript" src="../js/knockout.mapping-2.4.1.js"></script>-->
+    <script type="text/javascript" src="../js/knockout.mapping-2.4.1.debug.js"></script>
+</head>
+<body>
+name:<span data-bind="text:name"></span><p/>
+age:<span data-bind="text:age"></span><p/>
+
+<button onclick="done2()">Done</button>
+<script type="text/javascript">
+;
+    var viewModel={
+        name:ko.observable("tom"),
+        age:ko.observable(18)
+    };
+
+    ko.applyBindings(viewModel);
+
+    function done1(){
+
+
+        var mapping = { 'include': ["sex"]};
+
+        var data = { name: 'zhang',  age:20,sex:1};
+
+        ko.mapping.fromJS(data,mapping,viewModel);
+
+        alert(viewModel.sex());
+    }
+
+function done2(){
+
+    /*var mapping={
+        'ignore':["age","name"]
+    };*/
+
+    ko.mapping.defaultOptions().include =["sex"];
+
+    var data = {    name: 'zhang',  sex:"女",age:20};
+
+    ko.mapping.fromJS(data,{},viewModel);
+    alert(viewModel.sex());
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+</head>
+<body>
+<p>Name: <input data-bind="hasFocus: editingName"/></p>
+<p>Age:<input data-bind="hasFocus:editingName" /></p>
+<!-- Showing that we can both read and write the focus state -->
+<div data-bind="visible: editingName">You're editing the name</div>
+<button data-bind="enable: !editingName(), click:function() { editingName(true) }">Edit name</button>
+<script type="text/javascript">
+
+    ko.bindingHandlers.hasFocus={
+        init:function(element, valueAccessor, allBindingsAccessor) {
+              $(element).focus(function(){
+                  var value=valueAccessor();
+                  value(true);//viewModel.editingName(true)
+              });
+              $(element).blur(function(){
+                  var value = valueAccessor();
+                  value(false);//viewModel.editingName(false)
+              })
+
+        },
+        update: function(element, valueAccessor, allBindingsAccessor) {
+            var value = ko.utils.unwrapObservable(valueAccessor());
+            if (value){
+                element.focus();
+            }else{
+                element.blur();
+            }
+        }
+    };
+
+    var viewModel={
+        editingName: ko.observable()
+    };
+    ko.applyBindings(viewModel);
+</script>
+</body>
+</html>

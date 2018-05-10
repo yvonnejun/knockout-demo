@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+   <div data-bind="visible:myValues().length>0">
+       Hello,Knockout.js
+   </div>
+   <button onclick="add()">Add</button>
+   <button onclick="del()">Remove</button>
+</body>
+<script type="text/javascript">
+    var myViewModel={
+        myValues: ko.observableArray([])
+    };
+
+    ko.applyBindings(myViewModel);
+
+    function add(){
+        myViewModel.myValues.push("aaa");
+    }
+    function del(){
+        myViewModel.myValues.shift();
+    }
+</script>
+</html>

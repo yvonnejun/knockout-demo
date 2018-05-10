@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+<p>
+<label><input type="checkbox" data-bind="checked:accept">同意此协议</label>
+</p>
+<button data-bind="enable:accept">下一步</button>
+</body>
+<script type="text/javascript">
+   var viewModel={
+       accept:ko.observable(false)
+   };
+   ko.applyBindings(viewModel);
+</script>
+</html>

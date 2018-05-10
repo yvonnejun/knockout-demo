@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <!--<script type="text/javascript" src="../js/json2.js"></script>-->
+
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+    <!--<script type="text/javascript" src="../js/knockout.mapping-2.4.1.js"></script>-->
+    <script type="text/javascript" src="../js/knockout.mapping-2.4.1.debug.js"></script>
+
+
+
+</head>
+ServerName:<span data-bind="text:serverTime"></span><p/>
+numUsers:<span data-bind="text:numUsers"></span>
+<button onclick="getDataUsingAjax()">getDataUsingAjax</button>
+<script type="text/javascript">
+
+    var viewModel={
+        serverTime: ko.observable("2014-1-1"),
+        numUsers: ko.observable(100)
+    };
+
+    ko.applyBindings(viewModel);
+
+    function getDataUsingAjax(){
+        //方式一、相当于从服务端接收到的是一个JSON对象
+        var data ={"serverTime":"2014-4-27","numUsers":200};
+        ko.mapping.fromJS(data,{},viewModel);
+        /*var obj = ko.mapping.toJS(viewModel);
+        console.log(obj);
+        alert(obj.numUsers);*/
+
+
+
+        //方式二、相当于从服务端接收到的是一个JSON格式的字符串
+      /*  var jsonString ='{"serverTime":"2014-4-27","numUsers":200}';
+        ko.mapping.fromJSON(jsonString,{},viewModel);*/
+
+       /* var jsonString = ko.mapping.toJSON(viewModel);
+        console.log(jsonString);*/
+        //alert(jsonString);
+
+
+        //viewModel.serverTime(data.serverTime);
+        //viewModel.numUsers(data.numUsers);
+    }
+
+
+
+</script>
+</body>
+</html>

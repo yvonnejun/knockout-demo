@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <!--<script type="text/javascript" src="../js/json2.js"></script>-->
+
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+    <!--<script type="text/javascript" src="../js/knockout.mapping-2.4.1.js"></script>-->
+    <script type="text/javascript" src="../js/knockout.mapping-2.4.1.debug.js"></script>
+
+
+
+</head>
+<body>
+data:<span data-bind="text:name"></span>
+<ul data-bind="foreach:children">
+    <li>id:<span data-bind="text:id"></span></li>
+    <li>name:<span data-bind="text:name"></span></li>
+    <li>namelength:<span data-bind="text:nameLength"></span></li>
+</ul>
+<button onclick="done()">Done</button>
+<script type="text/javascript">
+
+    var myChildModel = function (data) {
+        ko.mapping.fromJS(data, {}, this);
+        this.nameLength = ko.dependentObservable(
+                function () {
+                    return this.name().length;
+                }, this);
+    };
+    var viewModel={
+        name:ko.observable("tom"),
+        children:ko.observableArray( [{id:1,name:"zhangsan",nameLength:8}])
+    };
+
+    ko.applyBindings(viewModel);
+
+    function done(){
+          var mapping = {
+              'children':{
+                  create:function(options){
+                      console.log("create");
+                      console.log(options);
+                      return new myChildModel(options.data);
+                  }
+              }
+          };
+
+        var data = {    name: 'Graham',    children: [        { id: 1, name: 'Lisa' }    ]};
+
+        ko.mapping.fromJS(data,mapping,viewModel);
+    }
+
+</script>
+</body>
+</html>

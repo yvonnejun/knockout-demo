@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jquery tmpl前端模板综合示例</title>
+    <meta charset="utf-8"/>
+    <script type="text/javascript" src="js/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="js/jquery-tmpl/jquery.tmpl.js"></script>
+
+    <script type="text/x-jquery-tmpl" id="studentsTemplate">
+        <tr>
+           <td>
+             {{if Class&&Class.length>0}}<img src="Image/folder_o.png"/>{{/if}}
+           </td>
+           <td>
+             ${Name}
+           </td>
+           <td>
+             ${Sex}
+           </td>
+           <td>
+             <a href="javascript:AjaxDeleteHandler(${ID})">删除</a>
+           </td>
+        </tr>
+        {{if Class&&Class.length>0}}
+        <tr>
+          <td colspan="4">
+              <table style="width:100%">
+                  <thead>
+                     <tr style="font-weight:bolder">
+                       <td>
+                          班级
+                       </td>
+                       <td>
+                          人数
+                       </td>
+                     </tr>
+                  </thead>
+                  <tbody>
+                       {{each Class}}
+                          <tr
+                              {{if $value.Count>16}}
+                                   style="background-color:red"
+                              {{else $value.Count>12}}
+                                   style="background-color:yellow"
+                              {{/if}}
+                          >
+                             <td>
+                                ${$value.ClassName}
+                             </td>
+                             <td>
+                                ${$value.Count}
+                             </td>
+                          </tr>
+                       {{/each}}
+                  </tbody>
+              </table>
+          </td>
+        </tr>
+        {{/if}}
+    </script>
+
+    <script type="text/javascript">
+       String.format = function() {
+            var s = arguments[0];
+            for (var i = 0; i < arguments.length - 1; i++) {
+                var reg = new RegExp("\\{" + i + "\\}", "gm");
+                s = s.replace(reg, arguments[i + 1]);
+            }
+            return s;
+        };
+       function AjaxDeleteHandler(id){
+           alert("Ajax Request is Submit,ID is:"+id);
+       }
+       function buildData(){
+           var data = new Array();
+           for(var i=0;i<19;i++){
+               data.push(
+                       {
+                           Name:String.format("学生{0}",i),
+                           Sex:i%2==0?"男":"女",
+                           ID:i,
+                           Class:[
+                               {
+                                   ClassName:String.format("Class1{0}",i),
+                                   Count:(i+10)/2
+                               },
+                               {
+                                   ClassName:String.format("Class2{0}",i),
+                                   Count:(i+20)/2
+                               }
+                           ]
+                       }
+               );
+           }
+
+           return data ;
+       }
+        $(function(){
+            //alert("ok");
+            var data = buildData();
+
+            /*var html =$("#studentsTemplate").tmpl(data).html();
+            //alert(html);
+            console.log(html);*/
+            $("#studentsTemplate").tmpl(data).appendTo("#test>tbody");
+
+            $("#test>tbody table").hide();
+
+
+            $("img").live("click",function(){
+                var $tr = $(this).parent().parent();
+                var state = $(this).data("state");
+
+                if (state=="o"){  //代表当前是展开状态，点击收缩
+                    $("table",$tr.next()).hide();
+                    $(this).data("state","c");
+                    $(this).attr("src","Image/folder_o.png");
+                }else{//代表其目前是收缩状态,点击展开
+                    $("table",$tr.next()).show();
+                    $(this).data("state","o");
+                    $(this).attr("src","Image/folder_c.png");
+                }
+            })
+
+
+
+        })
+    </script>
+</head>
+<body>
+
+<form id="form1">
+    <div id="div1">
+        <table id="test" width="400" border="1">
+            <thead>
+               <tr><td>ID</td><td>姓名</td><td>性别</td><td>操作</td></tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</form>
+</body>
+</html>

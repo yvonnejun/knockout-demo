@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+<div data-bind="click:myDivHandler">
+    <button data-bind="click:myButtonHandler,clickBubble:false">Click Me</button>
+</div>
+</body>
+<script type="text/javascript">
+   var viewModel={
+      myDivHandler:function(){
+          alert("div clicked");
+      },
+      myButtonHandler:function(){
+          alert("button clicked");
+      }
+   };
+   ko.applyBindings(viewModel);
+</script>
+</html>

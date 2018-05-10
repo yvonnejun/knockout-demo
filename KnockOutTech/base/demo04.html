@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+   personName:<span data-bind="text:personName"></span>
+   personAge:<span data-bind="text:personAge"></span>
+
+   <p/>
+
+   Name:<input id="txtName" type="text" data-bind="value:personName"/><br/>
+   Age:<input id="txtAge"  type="text" data-bind="value:personAge"/>
+   <button onclick="cancelSubscribe()">取消订阅</button>
+</body>
+<script type="text/javascript">
+    var subscription = null;
+    //step2 定义ViewModel
+    //var myViewModel ={personName:"zhangsan",personAge:18};
+    var myViewModel ={
+        personName:ko.observable(""),
+        personAge:ko.observable()
+    }
+
+    ko.applyBindings(myViewModel);
+
+    myViewModel.personName.subscribe(
+            function(newValue) {
+                alert("The person's new name is " + newValue);
+            }
+    );
+    subscription = myViewModel.personAge.subscribe(function(newValue){
+        //alert("The person's new age is "+newValue);
+        if (isNaN(newValue)){
+            alert("请输入一个数字！");
+
+            document.getElementById("txtAge").focus();
+            myViewModel.personAge("");
+
+        }
+    });
+
+    function cancelSubscribe(){
+        if (subscription){
+            subscription.dispose();
+            alert("已经取消了订阅！");
+        }
+    }
+
+</script>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+<table border="1">
+    <thead><tr><th>First Name</th><th>Last Name</th></tr></thead>
+    <tbody data-bind="foreach:people">
+    <tr>
+        <td data-bind="text:firstName"></td>
+        <td  data-bind="text:lastName"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+<script type="text/javascript">
+
+    ko.applyBindings({
+        people:[
+            { firstName: 'Bert', lastName: 'Bertington' },
+            { firstName: 'Charles', lastName: 'Charlesforth' },
+            { firstName: 'Denise', lastName: 'Dentiste' }
+        ]
+    });
+
+
+</script>
+</html>

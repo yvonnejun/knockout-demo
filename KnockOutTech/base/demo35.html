@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+<p>Your value:<input data-bind="value:someValue,valueUpdate:'afterkeydown'" ></input></p>
+<p>Your have typed:<span data-bind="text:someValue"></span></p>
+</body>
+<script type="text/javascript">
+   var viewModel={
+      someValue:ko.observable("edit me")
+   };
+   ko.applyBindings(viewModel);
+</script>
+</html>

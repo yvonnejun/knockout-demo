@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+You've clicked <span data-bind="text:numberOfClicks"></span>
+<!--<button data-bind="click:incrementClickCountor(1,2)">Click Me</button>-->
+<button data-bind="click:function(){viewModel.incrementClickCountor('parm1','parm2')}">Click Me1</button>
+<button data-bind="click:function(){incrementClickCountor(1,2)}">Click Me2</button>
+</body>
+<script type="text/javascript">
+   var viewModel={
+       numberOfClicks:ko.observable(0),
+       incrementClickCountor:function(arg1,arg2){
+           console.log(arg1);
+           console.log(arg2);
+           var preCount = this.numberOfClicks();
+           this.numberOfClicks(preCount+1);
+       }
+   };
+   ko.applyBindings(viewModel);
+</script>
+</html>

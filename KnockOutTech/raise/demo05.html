@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-tmpl-master/jquery.tmpl.js"></script>
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+</head>
+<body>
+<!--<div data-bind="template:{name:'personTemplate'}"></div>-->
+<div data-bind="template:'personTemplate'"></div>
+<script type="text/html" id="personTemplate">
+    ${name} is ${age} yeas old
+    <button data-bind="click:makeOlder">Make Older</button>
+</script>
+<script type="text/javascript">
+    var viewModel ={
+        name:ko.observable("zhangsan"),
+        age:ko.observable(18),
+        makeOlder:function(){
+            this.age(this.age()+1);
+        }
+    };
+    ko.applyBindings(viewModel);
+</script>
+</body>
+</html>

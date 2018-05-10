@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+<select size="5" multiple="multiple" data-bind="options:items,selectedOptions:selectedItems"></select>
+<button onclick="selectedValue()">Selected</button>
+
+</body>
+<script type="text/javascript">
+    var viewModel={
+        items:ko.observableArray(["A","B","C"]),
+        selectedItems:ko.observableArray(["B"])
+    }
+    ko.applyBindings(viewModel);
+
+    function selectedValue(){
+        viewModel.selectedItems.push("C");
+    }
+
+
+</script>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+
+
+   price:<strong data-bind="text:price"></strong>
+   请输入新的价格：<input type="text" data-bind="value:formatterPrice"/>
+
+
+
+</body>
+<script type="text/javascript">
+   function Goods(){
+       this.price = ko.observable(20.99)
+
+       this.formatterPrice = ko.computed({
+           read:function(){
+               return '$' + this.price().toFixed(2);
+           },
+           write:function(value){
+               value = parseFloat(value.replace(/[^\.\d]/g, ""));
+               this.price(isNaN(value)?0:value);
+           },
+           owner:this
+       })
+
+      /* self.fullName=ko.computed({
+           read: function(){
+               return this.firstName() + " " + this.lastName();
+           },
+           write: function(value) {
+               var lastSpacePos = value.lastIndexOf(" ");
+               if (lastSpacePos > 0) { // Ignore values with no space character
+                   this.firstName(value.substring(0, lastSpacePos)); // Update "firstName"
+                   this.lastName(value.substring(lastSpacePos + 1)); // Update "lastName"
+               }
+           },
+           owner: this
+       })*/
+   }
+   ko.applyBindings(new Goods());
+</script>
+</html>

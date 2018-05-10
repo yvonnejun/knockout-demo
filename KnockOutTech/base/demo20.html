@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+<h4>People</h4>
+<ul  data-bind="foreach:people">
+    <li>
+        Name:<span data-bind="text:$data.name"></span>
+        <a href="#" data-bind="click:$parent.removePerson">Remove</a>
+    </li>
+</ul>
+<button data-bind="click:addPerson">Add</button>
+<ul data-bind="foreach:month">
+    <li data-bind="text:$data"></li>
+</ul>
+</body>
+<script type="text/javascript">
+    function AppViewModel(){
+        var self = this;
+        self.people=ko.observableArray([
+            {name:"zhang"},
+            {name:"wang"},
+            {name:"li"}
+        ]);
+        self.month=ko.observableArray([ 'Jan', 'Feb', 'Mar', 'etc' ]);
+        self.addPerson=function(){
+            self.people.push({name:"New at is "+new Date()});
+        };
+        self.removePerson = function(){
+            self.people.remove(this);
+        }
+    }
+
+    ko.applyBindings(new AppViewModel());
+</script>
+</html>

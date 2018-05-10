@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+  <!--<ul data-bind="foreach:categories">
+      <li>
+          <ul data-bind="foreach:items">
+              <li>
+                  <span data-bind="text:$parent.name"></span>
+                  <span data-bind="text:$data"></span>
+              </li>
+          </ul>
+      </li>
+  </ul>-->
+  <ul data-bind="foreach:{data:categories,as:'c'}">
+      <li>
+          <ul data-bind="foreach:{data:items,as:'item'}">
+              <li>
+                  <span data-bind="text:c.name"></span>
+                  <span data-bind="text:item"></span>
+              </li>
+          </ul>
+      </li>
+  </ul>
+</body>
+<script type="text/javascript">
+    var viewModel ={
+        categories:ko.observableArray([
+            {name:"A",items:["A1","A2","A3"]},
+            {name:"B",items:["B1","B2","B3"]}
+        ])
+    };
+    ko.applyBindings(viewModel);
+</script>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+
+   firstName is  <span data-bind="text:firstName"></span><br/>
+   lastName is <span data-bind="text:lastName"></span><br/>
+   fullName is <span data-bind="text:fullName"></span><br/>
+   firstName:<input type="text" data-bind="value:firstName"/><br/>
+   lastName:<input  type="text" data-bind="value:lastName"/><br/>
+   fullName:<input type="text" data-bind="value:fullName"/>
+
+
+</body>
+<script type="text/javascript">
+   function Person(){
+       var self = this;
+       self.firstName= ko.observable("zhang"),
+       self.lastName=ko.observable("san"),
+       self.fullName=ko.computed({
+           read: function(){
+               return this.firstName() + " " + this.lastName();
+           },
+           write: function(value) {
+               var lastSpacePos = value.lastIndexOf(" ");
+               if (lastSpacePos > 0) { // Ignore values with no space character
+                   this.firstName(value.substring(0, lastSpacePos)); // Update "firstName"
+                   this.lastName(value.substring(lastSpacePos + 1)); // Update "lastName"
+               }
+           },
+           owner: this
+       })
+   }
+   ko.applyBindings(new Person());
+</script>
+</html>

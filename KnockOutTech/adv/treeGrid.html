@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="resources/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="resources/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="resources/demo.css">
+    <script type="text/javascript" src="resources/jquery.min.js"></script>
+    <script type="text/javascript" src="resources/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/knockout-3.1.0.debug.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="resources/knockout.etreegrid.js"></script>
+</head>
+<body>
+<div id="area-form">
+    <div id="area-tool-bar">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true"
+           data-bind="click: add">新增</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true"
+           data-bind="click: edit">编辑</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true"
+           data-bind="click: remove">删除</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" plain="true"
+           data-bind="click: cancel">取消</a>
+    </div>
+    <table id="area-list" rownumbers="true" title="区域列表" border="0" toolbar="#area-tool-bar"
+           data-bind="etreegrid: tree">
+        <thead>
+        <tr>
+            <th field="Name" width="500" data-options="editor:{type:'validatebox',options:{required:true}}">地区名称</th>
+            <th field="Code" width="120" data-options="editor:{type:'validatebox'}">地区编码</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<script type="text/javascript">
+    (function () {
+        var newId = 9999999;
+        var listId = "#area-list";
+        function AreaModel() {
+            this.tree = {
+                url: "resources/data/treegrid_data2.json",
+                treeField: "Name",
+                idField: "ID",
+                saveUrl: "resources/data/save.json",
+                deleteUrl: "resources/data/delete.json"
+            };
+            this.newNode = function (parentId) {
+                return { ID: newId, Name: '', Code: '', ParentID: parentId };
+            };
+            this.add = ko.observable();
+            this.edit = ko.observable();
+            this.remove = ko.observable();
+            this.cancel = ko.observable();
+            this.validate = function (node) {
+                return !!node.Name;
+            };
+            this.onCancel = function (node) {
+                if (node && node.ID == newId) {
+                    $(listId).treegrid("remove", node.ID);
+                }
+            };
+            this.onSaved = function (data, editIndex) {//修改成功之后，先删除掉原来的，再增加一个现在的
+                if (data.result) {
+                    var row = data.data;
+                    if (editIndex == newId) {
+                        $(listId).treegrid("remove", editIndex);
+                        $(listId).treegrid("append", { parent: row.ParentID, data: [data.data] });
+                    }
+                }
+            };
+            this.onRemoving = function (node) {
+
+                if (node.children && node.children.length > 0) {
+                    $.messager.alert('删除失败', "该地区有下属分类，不可直接删除！", 'warning');
+                    return false;
+                }
+
+
+                return true;
+            };
+        };
+        ko.applyBindings(new AreaModel(), document.getElementById("area-form"));
+    })();
+</script>
+</body>
+
+</html>

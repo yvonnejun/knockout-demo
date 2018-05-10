@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+<div data-bind="event:{mouseover:enableDetails,mouseout:disableDetails}">Mouse over Me</div>
+<div data-bind="visible:detailsEnabled">Details Message</div>
+</body>
+<script type="text/javascript">
+   var viewModel={
+     detailsEnabled:ko.observable(false),
+     enableDetails:function(){
+         this.detailsEnabled(true);
+     },
+     disableDetails:function(){
+         this.detailsEnabled(false);
+     }
+   };
+   ko.applyBindings(viewModel);
+</script>
+</html>

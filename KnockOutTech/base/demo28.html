@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+<h1 data-bind="text:city"></h1>
+<!--<p>
+    latitude:<span data-bind="text:coords.latitude"></span> <br/>
+    longitude:<span data-bind="text:coords.longitude"></span>
+</p>-->
+<!--<p data-bind="with: coords">-->
+<p data-bind="with: coords">
+    latitude:<span data-bind="text: latitude"></span> <br/>
+    longitude:<span data-bind="text: longitude"></span>
+</p>
+
+</body>
+<script type="text/javascript">
+   var viewModel ={
+       city: "London",
+       coords: {
+           latitude: 51.5001524,
+           longitude: -0.1262362
+       }
+   };
+
+   ko.applyBindings(viewModel);
+</script>
+</html>

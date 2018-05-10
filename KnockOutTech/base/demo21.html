@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+   <h1 data-bind="text:title"></h1>
+   <ul data-bind="foreach:articles">
+       <li data-bind="text:name"></li> from <strong data-bind="text:$parent.title"></strong>
+   </ul>
+</body>
+<script type="text/javascript">
+    function Article(){
+        this.title= ko.observable("Knockout.js从入门到精通");
+        this.articles = ko.observableArray([{name:"文章一"},{name:"文章二"},{name:"文章三"}]);
+
+    }
+    ko.applyBindings(new Article());
+</script>
+</html>

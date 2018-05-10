@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+   <div data-bind="html:detail"></div>
+   <div data-bind="text:detail"></div>
+</body>
+<script type="text/javascript">
+    var myViewModel={
+       detail:ko.observable()
+    };
+    ko.applyBindings(myViewModel);
+
+    myViewModel.detail("<script type='text/javascript'>alert('ok')"+"</"+"script><em>"+"For further details, " +
+            "view the report<a href='report.html'>here</a>.</em>");
+
+</script>
+</html>

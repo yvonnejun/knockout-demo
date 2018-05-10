@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+
+</head>
+<body>
+
+<p>    Your country:
+    <select data-bind="options: availableCountries, optionsText: 'countryName',
+     value: selectedCountry, optionsCaption: 'Choose...'"></select>
+</p>
+<div data-bind="visible: selectedCountry">
+    <!-- Appears when you select something -->    You have chosen a country with population
+    <span data-bind="text: selectedCountry() ? selectedCountry().countryPopulation : 'unknown'"></span>.
+</div>
+
+</body>
+<script type="text/javascript">
+    var country =function (name, population) {
+        this.countryName = name;
+        this.countryPopulation = population;
+    };
+    var viewModel = {
+        availableCountries: ko.observableArray([
+            new country("UK", 65000000),
+            new country("USA", 320000000),
+            new country("Sweden", 29000000)]),
+        selectedCountry: ko.observable() // Nothing selected by default
+    };
+    ko.applyBindings(viewModel);
+
+
+</script>
+</html>

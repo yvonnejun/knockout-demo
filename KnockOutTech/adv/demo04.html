@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+</head>
+<body>
+<div data-bind="allowBindings:true">
+    <div data-bind="text:Replacemenent">Original</div>
+</div>
+
+<div data-bind="allowBindings:false">
+    <div data-bind="text:Replacemenent">Original</div>
+</div>
+
+<script type="text/javascript">
+   ko.bindingHandlers.allowBindings={
+       init:function(elem,valueAccessor){
+           var shouldAllowBindings = ko.utils.unwrapObservable(valueAccessor());
+           return { controlsDescendantBindings:!shouldAllowBindings};
+
+       }
+   };
+
+   var viewModel ={
+       Replacemenent:ko.observable("Test Binding Content")
+   };
+   ko.applyBindings(viewModel);
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <!--step1:添加KO的引用-->
+    <script type="text/javascript" src="../js/knockout-3.1.0.js"></script>
+</head>
+<body>
+<!--<div data-bind="template:{name:'person-template',data:buyer}"></div>
+<div data-bind="template:{name:'person-template',data:seller}"></div>-->
+<div data-bind="template:{name:'person-template',foreach:person}"></div>
+<script type="text/html" id="person-template">
+    <h3 data-bind="text:name"></h3>
+    <p>credits:<span data-bind="text:credits"></span></p>
+</script>
+<script type="text/javascript">
+    function MyViewModel() {
+        this.person=[
+            { name: 'Franklin', credits: 250 },
+            { name: 'Mario', credits: 5800 }
+        ]
+    }
+    ko.applyBindings(new MyViewModel());
+</script>
+</body>
+</html>
