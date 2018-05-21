@@ -70,6 +70,41 @@
 # })
 # 上面简单几行代码就把jquery、layui和ko框架都加载进来了，非常不错
 
+# require.js加载html模板
+ # 1、首先要载入text.js(或安装npm require-text插件)
+ # 载入写法是：
+ # var requireConfig = {
+	baseUrl: _CONTEXTPATH +"/js/apps/",
+	paths: {
+        jquery: '../libs/jquery-1.11.3.min',
+        layui: '../libs/layui/layui.all',
+        ko: '../libs/knockout-3.4.2',
+
+        text: '../libs/text',
+
+        components: '../../components'
+ # 	},
+
+ # 2、然后index.js写法是
+ # require(['jquery', 'layui', 'ko', "text!../../components/header/header.html"], function($, layui, ko, header) {
+    var layer = layui.layer;
+    var vm = {
+        projectName: 'knockout项目'
+    };
+    layer.msg('hello');
+    ko.applyBindings(vm);
+    // $('#target').html(require("text!目标按钮对应的页面.html"));
+
+    $('#header').html(header);
+
+# })
+# 在require依赖数组中用"text:模板路径/文件名"方式导入模板模块，再用$('#header').html(header);嵌入方式引用即可。
+# 注意：对应的页面样式文件放在嵌入模板的主html页面中即可。
+
+
+
+
+
 # gulp命令的启动
   #1、首先得引入一个gulpfile.js的命令配置文件，专门执行less文件编译的
   #2、其次可以在命令行里面试一下，gulp less这样的编译命令，若发现不成功，报gulp命令不识别的话，证明了gulp因为文件目录移动了以后，发生了版本冲突，导致gulp命令直接不可使用
