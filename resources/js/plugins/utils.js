@@ -427,6 +427,19 @@ Utils.prototype = {
     unkilobit: function (str) { 
         str = str.replace(/,/g, "");//取消字符串中出现的所有逗号 
         return str; 
+    },
+    addCssByLink: function(url){  
+        var doc=document;  
+        var link=doc.createElement("link");  
+        link.setAttribute("rel", "stylesheet");  
+        link.setAttribute("type", "text/css");  
+        link.setAttribute("href", url);  
+      
+        var heads = doc.getElementsByTagName("head");  
+        if(heads.length)  
+            heads[0].appendChild(link);  
+        else  
+            doc.documentElement.appendChild(link);  
     } 
 }
 window.utils = new Utils();

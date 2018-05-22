@@ -2075,7 +2075,8 @@ var requireConfig = {
         layui: '../libs/layui/layui.all',
         ko: '../libs/knockout-3.4.2',
         text: '../libs/text',
-        components: '../../components'
+        components: '../../components',
+        utils: '../plugins/utils'
 	},
 	
 	shim: {
@@ -2085,6 +2086,9 @@ var requireConfig = {
         },
         ko: {
             exports: 'ko'
+        },
+        utils: {
+            exports: 'utils'
         }
 	}
 };

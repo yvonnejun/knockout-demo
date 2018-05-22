@@ -1,2 +1,4 @@
-
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ0by5jc3MifQ== */
+#main {
+  width: calc(100% - 200px);
+  margin-left: 200px;
+}
