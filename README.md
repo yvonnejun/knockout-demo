@@ -242,6 +242,6 @@
 	}
 # };
 
-#本ko+require+jquery+gulp+less+layui的技术栈项目架构就搭建完毕。作者：杨俊 创建日期：2018-05-23
+#本ko+require+jquery+gulp+less+layui+nodejs-server.js启动服务的技术栈项目架构就搭建完毕。作者：杨俊 创建日期：2018-05-23
 
   
