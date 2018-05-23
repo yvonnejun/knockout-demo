@@ -9,17 +9,19 @@ require([
     'ko', 
     'utils', 
     'text!../../components/header/header.html',
-    'text!../../components/slider-left/slider-left.html',
-    'text!../../components/demo1/demo1.html',
-    'text!../../components/demo2/demo2.html'], function(
+    'text!../../components/slider-left/slider-left.html'
+    // 'text!../../components/demo1/demo1.html',
+    // 'text!../../components/demo2/demo2.html'  // 注：这样的模块加载是有效的
+], function(
         $, 
         layui, 
         ko, 
         utils, 
         header, 
-        sliderLeft,
-        demo1,
-        demo2) {
+        sliderLeft
+        // demo1,  // 上面的模板变成模块后，也要在参数里面引用进来才行
+        // demo2
+    ) {
     var layer = layui.layer;
     var vm = {
         projectName: 'knockout项目'
@@ -38,24 +40,19 @@ require([
     // 加载主区域内容
     init();
     function init() {
-        loadPage(demo2, 'demo2');
+        utils.loadPage('demo2');
     }
 
     $('.layui-nav-item').find('a').click(function () {
         //console.log($(this).data('url'));
         var path = $(this).data('url');
         //console.log(require('text!../../components/'+path+'/'+path+'.html'));
-        var module = require('text!../../components/'+path+'/'+path+'.html');
+        // var module = require('text!../../components/'+path+'/'+path+'.html'); // 实测这样写也是有效的
         // console.log(require('text!../../components/demo2/demo2.html'));
-        loadPage(module, path);
+        utils.loadPage(path);
     });
 
-    function loadPage(moduleName, styleName) {
-        // $('#main').html('');
-        // $('#main').html(moduleName);
-        $('#main').load('/resources/components/'+styleName+'/'+styleName+'.html');
-        utils.addCssByLink('/resources/css/' + styleName + '.css');
-    }
+    
 })
 
 

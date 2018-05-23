@@ -441,12 +441,20 @@ Utils.prototype = {
         else  
             doc.documentElement.appendChild(link);  
     },
-    //移除绑定
+    //移除ko绑定
     removeBingding: function () {
         var main = document.getElementById('main');
         main.setAttribute("data-bind", "");
         ko.cleanNode(main);
         ko.applyBindings(myModel, main);
+    },
+    // 动态加载html页面和css样式
+    loadPage: function(moduleName) {
+        // $('#main').html('');
+        // $('#main').html(moduleName); // html则就非要加载转换成模块的html代码了
+        // load方法可以直接加载.html方法
+        $('#main').load('/resources/components/' + moduleName + '/' + moduleName + '.html');
+        this.addCssByLink('/resources/css/' + moduleName + '.css');
     }
 }
 window.utils = new Utils();

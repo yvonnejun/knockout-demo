@@ -159,4 +159,89 @@
 # 载入重置用css文件reset.css
 # <link type="text/css" rel="stylesheet" href="/resources/css/reset.css">
 
+
+
+# 最后一步:点击左边栏能动态加载不同的页面到#main的DOM中--
+  # 1、在components模块中写上两个demo1和demo2组件页面
+   # 写成组件的形式--html和js放在一个目录中，css动态在js中加载到index.html页面<link>标签中
+   # utils.addCssByLink('/resources/css/' + moduleName + '.css');
+   # 注意：a、要注意的一点就是每次加载相同的页面时，因为还没解除上次的ko绑定,所以程序中出现的再次ko.applyBindings绑定就会报错多次绑定同一个元素的错，解决这个问题的办法就是，ko.cleanNode(main);用cleanNode()方法清除绑定，再加载页面时就是一次全新的绑定了，不会报错。
+   # b、加载html页面推荐使用，下面的方法
+   // 动态加载html页面和css样式
+    loadPage: function(moduleName) {
+        // $('#main').html('');
+        // $('#main').html(moduleName); // html则就非要加载转换成模块的html代码了
+        // load方法可以直接加载.html方法
+        $('#main').load('/resources/components/' + moduleName + '/' + moduleName + '.html');
+        this.addCssByLink('/resources/css/' + moduleName + '.css');
+    }
+   # 上面的关键点就是$('#main').load('/resources/components/' + moduleName + '/' + moduleName + '.html');用load()方法来动态加载html页面，这个方法有个好处就是通过字符串拼接路径就能加载html文件
+
+   # 2、给左边栏的nav栏绑定点击事件加载页面
+   # 注意：这个点击一、不能是ko的data-bind的click事件，二、必须是写在index.js里面的jquery操作的DOM事件
+   # $('.layui-nav-item').find('a').click(function () {
+        //console.log($(this).data('url'));
+        var path = $(this).data('url');
+        //console.log(require('text!../../components/'+path+'/'+path+'.html'));
+        // var module = require('text!../../components/'+path+'/'+path+'.html'); // 实测这样写也是有效的
+        // console.log(require('text!../../components/demo2/demo2.html'));
+        utils.loadPage(path);
+   # });
+   # 写在左边栏slider-left.js里面的点击事件可能会无效或报错
+
+   # 3、实测用require()灵活的加载html转换成模块也是有效的
+   # 写法是:
+   # a、var module = require('text!../../components/'+path+'/'+path+'.html');
+   # b、require([
+    'jquery', 
+    'layui', 
+    'ko', 
+    'utils', 
+    'text!../../components/header/header.html',
+    'text!../../components/slider-left/slider-left.html'
+    'text!../../components/demo1/demo1.html',
+    'text!../../components/demo2/demo2.html'  // 注：这样的模块加载是有效的
+], function(
+        $, 
+        layui, 
+        ko, 
+        utils, 
+        header, 
+        sliderLeft
+        demo1,  // 上面的模板变成模块后，也要在参数里面引用进来才行
+        demo2
+   # ) {
+   # c、$('#slider-left').html(require('text!../../components/slider-left/slider-left.html'));等效于$('#slider-left').load()
+   或$('#header').html(header);
+
+# 注意：a、require中能加载html模板全靠text.js一个require插件，加载在require.config.js配置中
+# b、本项目中的require.config.js配置代码写在了require.js库文件的最后几行中,其中就加载了text:'../libs/text'
+# var _CONTEXTPATH = '/resources';
+  var requireConfig = {
+	baseUrl: _CONTEXTPATH +"/js/apps/",
+	paths: {
+        jquery: '../libs/jquery-1.11.3.min',
+        layui: '../libs/layui/layui.all',
+        ko: '../libs/knockout-3.4.2',
+        text: '../libs/text',
+        components: '../../components',
+        utils: '../plugins/utils'
+	},
+	
+	shim: {
+		layui: {
+			deps: ['jquery'],
+            exports: 'layui'
+        },
+        ko: {
+            exports: 'ko'
+        },
+        utils: {
+            exports: 'utils'
+        }
+	}
+# };
+
+#本ko+require+jquery+gulp+less+layui的技术栈项目架构就搭建完毕。作者：杨俊 创建日期：2018-05-23
+
   
