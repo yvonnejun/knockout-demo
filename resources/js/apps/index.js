@@ -51,12 +51,9 @@ require([
     });
 
     function loadPage(moduleName, styleName) {
-        ko.unapplyBindings = function ($node, remove) { 
-            // unbind events 
-            $node.find("*").each(function(){ $(this).unbind(); }); 
-        }
-        $('#main').html('');
-        $('#main').html(moduleName);
+        // $('#main').html('');
+        // $('#main').html(moduleName);
+        $('#main').load('/resources/components/'+styleName+'/'+styleName+'.html');
         utils.addCssByLink('/resources/css/' + styleName + '.css');
     }
 })

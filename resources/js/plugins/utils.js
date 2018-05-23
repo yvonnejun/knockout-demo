@@ -440,7 +440,14 @@ Utils.prototype = {
             heads[0].appendChild(link);  
         else  
             doc.documentElement.appendChild(link);  
-    } 
+    },
+    //移除绑定
+    removeBingding: function () {
+        var main = document.getElementById('main');
+        main.setAttribute("data-bind", "");
+        ko.cleanNode(main);
+        ko.applyBindings(myModel, main);
+    }
 }
 window.utils = new Utils();
 utils.getCurrentPageClientHeight();
