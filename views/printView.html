@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--<link rel="stylesheet" href="/resources/css/reset.css">-->
+    <!-- <link rel="stylesheet" href="./css/flyui.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/setting.css"> -->
+<style type="text/css">
+body,
+div {
+    margin: 0;
+    padding: 0;
+}
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font: normal 14px "Microsoft YaHei";
+}
+body,
+div,
+p,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form {
+    margin: 0;
+    padding: 0;
+}
+
+img,
+abbr,
+acronym {
+    border: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+}
+ol,
+ul {
+    list-style: none;
+}
+a {
+    outline: 0;
+    _blr: expression(this.onFocus=this.blur());
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:visited,
+a:focus {
+    text-decoration: none;
+   /*  background-color:#684035; */
+}
+p {
+    text-indent: 20px;
+}
+
+input {
+    outline: none;
+}
+textarea {
+    resize: none;
+}
+/* table */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table tr,
+table th,
+table td {
+    border-collapse: collapse;
+}
+.wrap {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    min-width: 1024px;
+    background:#f5f5f5;
+}
+.navigation-wrap{
+    height:50px;
+    line-height:50px;
+    font-size:12px;
+    margin-bottom:15px;
+    color:#999999;
+    background:white;
+}
+.setting-wrap {
+    background: #ffffff;
+    /*border: 1px solid #ccc;*/
+    margin: 10px;
+    padding: 25px;
+    height: 750px;
+    min-width: 1024px;
+    font-size: 12px;
+}
+
+.setting-left-wrap {
+    height: 695px;
+    padding-right: 100px;
+}
+
+.setting-left-wrap .form-control {
+    margin: 5px 0;
+}
+
+.setting-left-wrap .form-control .label label {
+    font-size: 12px;
+    color: #333;
+}
+
+.setting-left-wrap .un-checked {
+    width: 20px;
+    height: 35px;
+}
+
+.setting-left-wrap .number-input {
+    width: 70px;
+    height: 28px;
+    line-height: 20px;
+    padding: 4px 0;
+    border-radius: 3px;
+    border: 1px solid;
+    border-color: #ddd;
+    text-indent: .33em;
+    font-size: 14px;
+    margin: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.setting-left-wrap .submit-btn {
+    background: #00abd4;
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+    margin-left: 102px;
+    color: white;
+    font-size: 14px;
+    line-height: 30px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.setting-left-wrap .time-wrap {
+    display: block;
+    position: relative;
+    border: 1px solid;
+    border-color: #ddd;
+    border-radius: 3px;
+    height: 28px;
+    line-height: 28px;
+    width: 46%;
+}
+
+.setting-left-wrap .time-wrap input {
+    height: 28px;
+    background: transparent;
+}
+
+.setting-left-wrap .time-wrap i {
+    margin-top: 5px;
+    margin-left: 6px;
+}
+
+.setting-right-wrap {
+    height: 695px;
+    padding-left: 100px;
+    /*border-left: 1px solid #ccc;*/
+}
+
+.setting-right-wrap .module-title {
+    border: none;
+    margin-top: 0;
+    background-color: transparent;
+    padding: 0;
+    font-size: 10px;
+    line-height: 10px;
+    height: 10px;
+}
+
+.setting-right-wrap .module-title .title-text {
+    border-left: 4px solid #00b3d6;
+    font-size: 14px;
+    color: #666;
+}
+
+.setting-right-wrap .preview-wrap {
+    color: white;
+    width: 285px;
+    height: 393px;
+    margin-top: 20px;
+    background: url('../img/preview-bg.png');
+    padding: 20px 35px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+}
+
+.setting-right-wrap .preview-wrap .title {
+    position: relative;
+    color: #333;
+    font-size: 18px;
+    line-height: 35px;
+    height: 35px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.setting-right-wrap .preview-wrap .title img {
+    width: 35px;
+    height: 35px;
+    margin-right: 5px;
+}
+
+.setting-right-wrap .preview-wrap .item {
+    position: relative;
+    color: #333;
+    line-height: 25px;
+    margin-bottom: 0;
+}
+
+.setting-right-wrap .preview-wrap .item .label {
+    padding-left: 10px;
+    padding-right: 0;
+}
+
+.setting-right-wrap .preview-wrap .item .value {
+    padding: 0;
+}
+
+.setting-right-wrap .preview-wrap .tip {
+    height: 25px;
+    color: #666;
+    line-height: 25px;
+}
+
+.setting-right-wrap .preview-wrap .qr-code-wrap {
+    text-align: center; 
+    margin-top: 10px;
+}
+
+.setting-right-wrap .preview-wrap .qr-code-wrap .qr-code {
+    width: 115px;
+    height: 115px;
+    margin-bottom: 10px;
+    border: 1px solid #00b2d6;
+    padding: 3px;
+}
+
+.setting-right-wrap .preview-wrap .bottom-tip {
+    margin-top: 20px;
+    line-height: 20px;
+    color: #999;
+    font-size: 12px;
+}
+/* 列表公用样式 */
+.module-title {
+    padding: 0 20px;
+    font-size: 16px;
+    line-height: 50px;
+    height: 50px;
+    color: #666666;
+    border: 1px solid #eceff0;
+    border-bottom:none;
+    margin-top: 30px;
+    background-color: #fff;
+}
+.module-title .title-text {
+    padding-left: 10px;
+    display: inline-block;
+    height: 16px;
+    border-left: 4px solid #0099cc;
+    line-height: 16px;
+    font-size:14px;
+    color:#282828;
+}
+.module-title  .btn-wrap{
+    padding-top: 10px;
+    line-height: 39px;
+}
+.border-none {
+    border: none;
+}
+.main-wrap{
+    margin:0 10px;
+}
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.row {
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    position: relative;
+    min-height: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+    float: left;
+}
+
+.col-xs-12 {
+    width: 100%;
+}
+
+.col-xs-11 {
+    width: 91.66666667%;
+}
+
+.col-xs-10 {
+    width: 83.33333333%;
+}
+
+.col-xs-9 {
+    width: 75%;
+}
+
+.col-xs-8 {
+    width: 66.66666667%;
+}
+
+.col-xs-7 {
+    width: 58.33333333%;
+}
+
+.col-xs-6 {
+    width: 50%;
+}
+
+.col-xs-5 {
+    width: 41.66666667%;
+}
+
+.col-xs-4 {
+    width: 33.33333333%;
+}
+
+.col-xs-3 {
+    width: 25%;
+}
+
+.col-xs-2 {
+    width: 16.66666667%;
+}
+
+.col-xs-1 {
+    width: 8.33333333%;
+}
+
+.col-xs-pull-12 {
+    right: 100%;
+}
+
+.col-xs-pull-11 {
+    right: 91.66666667%;
+}
+
+.col-xs-pull-10 {
+    right: 83.33333333%;
+}
+
+.col-xs-pull-9 {
+    right: 75%;
+}
+
+.col-xs-pull-8 {
+    right: 66.66666667%;
+}
+
+.col-xs-pull-7 {
+    right: 58.33333333%;
+}
+
+.col-xs-pull-6 {
+    right: 50%;
+}
+
+.col-xs-pull-5 {
+    right: 41.66666667%;
+}
+
+.col-xs-pull-4 {
+    right: 33.33333333%;
+}
+
+.col-xs-pull-3 {
+    right: 25%;
+}
+
+.col-xs-pull-2 {
+    right: 16.66666667%;
+}
+
+.col-xs-pull-1 {
+    right: 8.33333333%;
+}
+
+.col-xs-pull-0 {
+    right: auto;
+}
+
+.col-xs-push-12 {
+    left: 100%;
+}
+
+.col-xs-push-11 {
+    left: 91.66666667%;
+}
+
+.col-xs-push-10 {
+    left: 83.33333333%;
+}
+
+.col-xs-push-9 {
+    left: 75%;
+}
+
+.col-xs-push-8 {
+    left: 66.66666667%;
+}
+
+.col-xs-push-7 {
+    left: 58.33333333%;
+}
+
+.col-xs-push-6 {
+    left: 50%;
+}
+
+.col-xs-push-5 {
+    left: 41.66666667%;
+}
+
+.col-xs-push-4 {
+    left: 33.33333333%;
+}
+
+.col-xs-push-3 {
+    left: 25%;
+}
+
+.col-xs-push-2 {
+    left: 16.66666667%;
+}
+
+.col-xs-push-1 {
+    left: 8.33333333%;
+}
+
+.col-xs-push-0 {
+    left: auto;
+}
+
+.col-xs-offset-12 {
+    margin-left: 100%;
+}
+
+.col-xs-offset-11 {
+    margin-left: 91.66666667%;
+}
+
+.col-xs-offset-10 {
+    margin-left: 83.33333333%;
+}
+
+.col-xs-offset-9 {
+    margin-left: 75%;
+}
+
+.col-xs-offset-8 {
+    margin-left: 66.66666667%;
+}
+
+.col-xs-offset-7 {
+    margin-left: 58.33333333%;
+}
+
+.col-xs-offset-6 {
+    margin-left: 50%;
+}
+
+.col-xs-offset-5 {
+    margin-left: 41.66666667%;
+}
+
+.col-xs-offset-4 {
+    margin-left: 33.33333333%;
+}
+
+.col-xs-offset-3 {
+    margin-left: 25%;
+}
+
+.col-xs-offset-2 {
+    margin-left: 16.66666667%;
+}
+
+.col-xs-offset-1 {
+    margin-left: 8.33333333%;
+}
+
+.col-xs-offset-0 {
+    margin-left: 0%;
+}
+.clearfix,
+.container,
+.container-fluid,
+.row,
+.dl-horizontal dd {
+    display: block;
+    zoom: 1;
+    *height: auto;
+}
+
+.clearfix:before,
+.clearfix:after,
+.container:before,
+.container:after,
+.container-fluid:before,
+.container-fluid:after,
+.row:before,
+.row:after,
+.dl-horizontal dd:before,
+.dl-horizontal dd:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after,
+.container:after,
+.container-fluid:after,
+.row:after,
+.dl-horizontal dd:after {
+    clear: both;
+}
+</style>
+ 
+</head>
+
+<body>
+<div class="wrap">
+    <div class="setting-wrap">
+        <div class="setting-right-wrap col-xs-5 col-xs-offset-4">
+            <!-- <div class="module-title">
+                <span class="title-text">预览效果</span>                
+            </div> -->
+
+            <div class="preview-wrap">
+                <div class="title">
+                    <!-- <img src="./img/preview_title_icon.png"/> -->
+                    安徽省政务服务中心
+                </div>
+                <div class="row row-ie item">
+                    <span class="col-xs-3 label">预约编号：</span>
+                    <span class="col-xs-8 value">0001</span>
+                </div>
+                <div class="row row-ie item">
+                    <span class="col-xs-3 label">您的号码：</span>
+                    <span class="col-xs-8 value">0001</span>
+                </div>
+                <div class="row row-ie item">
+                    <span class="col-xs-3 label">办理业务：</span>
+                    <span class="col-xs-8 value">
+                        <span>省教育厅</span>
+                        <br>
+                        <span style="width:200px;word-wrap: break-word;">事项名事项名事项名事项</span>
+                    </span>
+                </div>
+                <div class="row row-ie item">
+                    <span class="col-xs-3 label">办理窗口：</span>
+                    <span class="col-xs-8 value">
+                        <span>窗口 1 , 2</span>
+                        <br>
+                        <span>1号办事大厅</span>
+                    </span>
+                </div>
+                <div class="row row-ie item">
+                    <span class="col-xs-3 label">等待人数：</span>
+                    <span class="col-xs-8 value">2</span>
+                </div>
+                <div class="tip">取票后请等待，我们将尽快为您服务</div>
+
+                <!-- <div class="qr-code-wrap">
+                    <img class="qr-code" src="./img/QRCode.png"/>
+                    <div class="item">扫一扫了解排队信息</div>
+                </div> -->
+
+                <div class="bottom-tip">
+                    <div>2018-04-12  09:30:28</div>
+                    <div>温馨提示：叫号后请到及时窗口办理业务，过号请重新取号</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+<script data-main="/resources/js/apps/setting/setting.js" src="/resources/js/require-2.1.11.js"></script>
+<script src="/resources/js/plugins/timepicker.js"></script>-->
+</body>
+</html>

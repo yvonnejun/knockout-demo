@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>号纸打印</title>
+
+<script language="javascript" src="LodopFuncs.js"></script>
+</head>
+<body>
+
+<h2><font color="#009999">演示如何分页输出页面内容：</font>
+</h2>
+<div id="div1_2_3">
+
+<div id="div1">
+  <table border="1" width="300" id="tb01" bgcolor="#CCFFCC" style="border:solid 1px black"><tr><td width="133" id="mtb001" style="border:solid 1px">
+  <font face="黑体" color="#FF0000" size="3">《带底色表单》</font></td></tr></table>
+  <table border="1" width="300" height="106" cellspacing="0" bgcolor="#CCFFFF" style="border-collapse:collapse;border:1px solid black"><tr>
+  <td width="66" height="16" style="border:1px solid black"><font color="#0000FF">A</font><font color="#0000FF">等</font></td>
+<td width="51" height="16" style="border:1px solid black"><font color="#0000FF">B</font><font color="#0000FF">等</font></td>
+<td width="51" height="16" style="border:1px solid black"><font color="#0000FF">C</font><font color="#0000FF">等</font></td></tr> 
+  <tr><td width="66" height="12" style="border:1px solid black">A001</td><td width="51" height="12" style="border:1px solid black">B001</td><td width="51" height="12" style="border:1px solid black">C001</td></tr> 
+  <tr><td width="66" height="16" style="border:1px solid black">A002</td><td width="51" height="16" style="border:1px solid black">B002</td><td width="51" height="16" style="border:1px solid black">C002</td></tr> 
+  <tr><td width="66" height="16" style="border:1px solid black">A003</td><td width="51" height="16" style="border:1px solid black">B003</td><td width="51" height="16" style="border:1px solid black">C003</td></tr> </table>
+  <img src="123.png">
+</div>
+
+<div id="div2">
+  <table border="1" width="300" height="106" cellspacing="0" style="border-collapse: collapse; border:double 3px black;" borderthin="true"> 
+  <tr><td width="168" height="12" colspan="3" style="border:1px solid black;"><font face="黑体" color="#FF0000" size="3">双细线表格</font></td></tr> 
+    <tr>
+  <td width="66" height="16" style="border:1px solid black"><font color="#0000FF">X等</font></td>
+<td width="51" height="16" style="border:1px solid black"><font color="#0000FF">Y等</font></td>
+<td width="51" height="16" style="border:1px solid black"><font color="#0000FF">Z等</font></td>
+    </tr>
+  <tr><td width="66" height="12" style="border:1px solid black">X001</td><td width="51" height="12" style="border:1px solid black">Y001</td><td width="51" height="12" style="border:1px solid black">Z001</td></tr> 
+  <tr><td width="66" height="16" style="border:1px solid black">X002</td><td width="51" height="16" style="border:1px solid black">Y002</td><td width="51" height="16" style="border:1px solid black">Z002</td></tr> 
+  <tr><td width="66" height="16" style="border:1px solid black">X003</td><td width="51" height="16" style="border:1px solid black">Y003</td><td width="51" height="16" style="border:1px solid black">Z003</td></tr> </table>
+</div>
+
+<div id="div3" style="page-break-before:always">
+  <table border="1" width="100%" id="tb01" style="border-collapse:collapse" bordercolor="#000000">
+  <tr><td colspan="3" style="border:1px solid black"><font face="黑体" color="#FF0000"  size="3">《单线表单》</font></td></tr>
+  <tr>
+  <td width="66" height="4" style="border:1px solid black"><font color="#0000FF">R等</font></td>
+  <td width="51" height="4" style="border:1px solid black"><font color="#0000FF">S等</font></td>
+  <td width="51" height="4" style="border:1px solid black"><font color="#0000FF">T等</font></td>
+  </tr>
+  <tr><td width="66" height="12" style="border:1px solid black">R001</td><td width="51" height="12" style="border:1px solid black">S001</td><td width="51" height="12" style="border:1px solid black">T001</td></tr> 
+  <tr><td width="66" height="16" style="border:1px solid black">R002</td><td width="51" height="16" style="border:1px solid black">S002</td><td width="51" height="16" style="border:1px solid black">T002</td></tr> 
+  <tr><td width="66" height="16" style="border:1px solid black">R003</td><td width="51" height="16" style="border:1px solid black">S003</td><td width="51" height="16" style="border:1px solid black">T003</td></tr> 
+  </table>
+</div>
+
+</div>
+
+
+
+<p>2：选择如下打印机：
+	<input type="radio" id="Radio1" name="RadioS1" checked>默认打印机                         
+	<input type="radio" id="Radio2" name="RadioS1" onclick="CreatePrinterList()">指定打印机:                  
+	<select id="PrinterList" size="1"></select> 
+</p>      
+                                  
+<!--<p>3：选择上一步所指定打印机的如下纸张类型：
+	<input type="radio" id="Radio3" name="RadioS2" checked >不指定纸张                         
+    <input type="radio" id="Radio4" name="RadioS2" onclick="CreatePagSizeList()">指定纸张:<select id="PagSizeList" size="1"></select>
+</p>  -->
+
+
+<button onclick="SetPrint7()" style="padding: 10px 20px;">设置默认打印机</button>
+
+<p>下面演示把以上三段内容分页输出：
+	<b>方式四</b>：每次打印一个表，循环3次实现分页输出，看一下<button onclick="prn4_preview()" style="padding: 10px 20px;">直接打印</button> 
+</p>             
+
+
+<script language="javascript" type="text/javascript"> 
+	var LODOP; //声明为全局变量    
+	    
+	function getSelectedPageSize(){
+		if (document.getElementById("Radio4").checked) 
+		return document.getElementById("PagSizeList").value;
+		else return ""; 		
+	};	
+	function CreatePrinterList(){
+	    if (document.getElementById('PrinterList').innerHTML!="") return;
+		LODOP=getLodop(); 
+		var iPrinterCount=LODOP.GET_PRINTER_COUNT();
+		for(var i=0;i<iPrinterCount;i++){
+			console.log(iPrinterCount[i]);
+
+   			var option=document.createElement('option');
+   			option.innerHTML=LODOP.GET_PRINTER_NAME(i);
+   			option.value=i;
+			document.getElementById('PrinterList').appendChild(option);
+		};	
+	};
+	function Print5() {		
+		LODOP=getLodop();  
+		LODOP.PRINT_INIT("");	
+		// LODOP.SET_PRINT_PAGESIZE(1,2100,2970,"A4");
+		AddPrintContent("10101010101010","郭德强");
+	  	LODOP.PRINT();	
+		// LODOP.PRINT_INIT("");	  	
+		// LODOP.SET_PRINT_PAGESIZE(1,document.getElementById('W1').value,document.getElementById('H1').value,"A3");
+		// AddPrintContent("10101010101012","于谦");
+	  	// LODOP.PRINT();		
+	};		
+	function getSelectedPrintIndex(){ // 选中的打印机的值返回出去，供默认打印机重新设置
+		if (document.getElementById("Radio2").checked) 
+			return document.getElementById("PrinterList").value;
+		else 
+			return -1; 		
+	};
+	function SetPrint7() {		
+		LODOP=getLodop();  
+		LODOP.PRINT_INIT("");
+		if (LODOP.CVERSION) CLODOP.On_Return=function(TaskID,Value){alert(Value);};
+		var strResult=LODOP.SET_PRINT_MODE("WINDOW_DEFPRINTER",getSelectedPrintIndex()); // getSelectedPrintIndex()执行后就是上面下拉框选中的打印机对应的value值
+		if (!LODOP.CVERSION) alert(strResult);
+	};
+	function CreatePagSizeList(){
+		LODOP=getLodop(); 
+		clearPageListChild();
+		var strPageSizeList=LODOP.GET_PAGESIZES_LIST(getSelectedPrintIndex(),"\n");
+		var Options=new Array(); 
+		Options=strPageSizeList.split("\n");       
+		for (i in Options)    
+		{    
+			var option=document.createElement('option');   
+			option.innerHTML=Options[i];
+			option.value=Options[i];
+			document.getElementById('PagSizeList').appendChild(option);
+		}  
+	}
+
+
+
+	function prn4_preview() { // 调用打印html的方法Prnt_Oneform
+		LODOP=getLodop();  	
+		Prnt_Oneform("div1");	
+		Prnt_Oneform("div2");	
+		Prnt_Oneform("div3");			
+	};
+	function Prnt_Oneform(strID) {	 // 打印html的函数
+		LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_分页输出四");
+		LODOP.ADD_PRINT_HTM(88,200,350,600,document.getElementById(strID).innerHTML);
+		LODOP.PRINT();	
+	};
+	function prn6_design() {
+		LODOP=getLodop();  	
+		LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_分页输出六");
+		LODOP.ADD_PRINT_HTM(88,150,450,150,"<!DOCTYPE html>"+document.getElementsByTagName("html")[0].innerHTML);
+		LODOP.SET_PRINT_STYLEA(0,"TableRowThickNess",25);
+		LODOP.PRINT_DESIGN();	
+	};
+</script> 
+
+</body>
+</html>
